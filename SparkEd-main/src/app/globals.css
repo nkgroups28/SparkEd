@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* src/styles/globals.css */
+
+/* Prevent text selection */
+.no-copy {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none; /* Standard */ 
+}
+
+/* Optionally disable right-click context menu */
+*:not(input, textarea) {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-tap-highlight-color: transparent; /* Safari */
+  user-zoom: none; /* Standard */
+  -webkit-user-drag: none; /* Safari */
+}
+
+
+
+@layer components {
+  .cube {
+    width: 4rem;
+    height: 4rem;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(-30deg) rotateY(-45deg);
+    animation: rotate-cube 3s infinite linear;
+  }
+
+  .cube-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #4299e1; /* Tailwind's blue-500 */
+    opacity: 0.9;
+    box-shadow: inset 0 0 1rem rgba(0, 0, 0, 0.2);
+  }
+
+  .cube-face-front  { transform: translateZ(2rem); }
+  .cube-face-back   { transform: rotateY(180deg) translateZ(2rem); }
+  .cube-face-left   { transform: rotateY(-90deg) translateZ(2rem); }
+  .cube-face-right  { transform: rotateY(90deg) translateZ(2rem); }
+  .cube-face-top    { transform: rotateX(90deg) translateZ(2rem); }
+  .cube-face-bottom { transform: rotateX(-90deg) translateZ(2rem); }
+
+  @keyframes rotate-cube {
+    0% {
+      transform: rotateX(-30deg) rotateY(-45deg);
+    }
+    100% {
+      transform: rotateX(-30deg) rotateY(315deg);
+    }
+  }
+}
